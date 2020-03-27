@@ -1,12 +1,13 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+from GraphVisualizerGUI import *
 
 def colorGraph(adjList):
-    colors = ["#FF0000", "#00FF00", "#0000FF", "#00FFFF"]
+    availableColors = ["#FF0000", "#00FF00", "#0000FF", "#00FFFF"]
     colorList = dict()
     G = nx.MultiGraph()
     # Start graph coloring
-    for color in colors:
+    for color in availableColors:
         for node in adjList:
             if(node in colorList):
                 continue
@@ -19,12 +20,16 @@ def colorGraph(adjList):
             if(can):
                 colorList[node] = color
     
-    graphColors = []
     # Add nodes to graph
     for node in adjList:
         G.add_node(node)
-        graphColors.append(colorList[node])
         for adj in adjList[node]:
             G.add_edge(node, adj)
-    nx.draw(G, node_color=graphColors, with_labels=True)
+    
+    nodes = G.nodes()
+    colors = [colorList[n] for n in nodes]
+    nx.draw(G, node_color=colors, with_labels=True)
     plt.show()
+
+# Main
+gui = GraphVisualizerGUI(colorGraph)

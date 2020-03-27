@@ -61,7 +61,7 @@ class InputsTab(ttk.Frame):
         self.edgesInput = tk.Frame(self)
         self.edgesInput.grid(row=3, column=0, columnspan=2, pady=(5, 10))
         nEdges = int(self.iNumberOfEdges.get())
-        createTableInput(self.edgesInput, 2, nEdges, 8)
+        InputsTab.createTableInput(self.edgesInput, 2, nEdges, 8)
 
     @staticmethod
     def createTableInput(frame, width, height, cellSize):

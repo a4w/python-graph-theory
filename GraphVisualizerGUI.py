@@ -22,5 +22,4 @@ class GraphVisualizerGUI:
         # what more does a caller need ? maybe return something ?
         # return a tuple, [0] is an image path for visuals
         self.callerCallback(adjList)
-        pass
     
