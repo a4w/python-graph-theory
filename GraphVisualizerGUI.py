@@ -19,7 +19,5 @@ class GraphVisualizerGUI:
     
     def _callbackInput(self, adjList):
         # adjList is a dict with int key and list value
-        # what more does a caller need ? maybe return something ?
-        # return a tuple, [0] is an image path for visuals
         self.callerCallback(adjList)
     

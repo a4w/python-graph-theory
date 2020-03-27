@@ -41,16 +41,27 @@ class InputsTab(ttk.Frame):
         nVerticies = int(self.iNumberOfVerticies.get())
         nEdges = int(self.iNumberOfEdges.get())
         relations = defaultdict(list)
+        good = True
         # Create tuples of edges
         for i in range(nEdges):
-            # TODO: Handle type error
-            u = int(self.edgesInput.grid_slaves(row=i, column=0)[0].get())
-            v = int(self.edgesInput.grid_slaves(row=i, column=1)[0].get())
+            try:
+                u = int(self.edgesInput.grid_slaves(row=i, column=0)[0].get())
+                v = int(self.edgesInput.grid_slaves(row=i, column=1)[0].get())
+                if(u > nVerticies or v > nVerticies):
+                    raise Exception
+            except ValueError:
+                tk.messagebox.showerror("Error", "Values entered are not integers")
+                good = False
+                break
+            except Exception:
+                tk.messagebox.showerror("Error", "Values entered are bigger than the number of verticies")
+                good = False
+                break
             relations[u].append(v)
             # if undirected
             relations[v].append(u)
-
-        self.callerCallback(relations)
+        if(good):
+            self.callerCallback(relations)
 
     def _createEdgeInputs(self):
         if(self.edgesInput != None):
