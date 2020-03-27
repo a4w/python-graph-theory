@@ -38,8 +38,12 @@ class InputsTab(ttk.Frame):
 
     def _generateEvent(self):
         # Generate adj list
-        nVerticies = int(self.iNumberOfVerticies.get())
-        nEdges = int(self.iNumberOfEdges.get())
+        try:
+            nVerticies = int(self.iNumberOfVerticies.get())
+            nEdges = int(self.iNumberOfEdges.get())
+        except ValueError:
+            tk.messagebox.showerror("Error", "Values entered as edge/verticies are not integers")
+            return
         relations = defaultdict(list)
         good = True
         # Create tuples of edges
@@ -71,7 +75,12 @@ class InputsTab(ttk.Frame):
         # edges input
         self.edgesInput = tk.Frame(self)
         self.edgesInput.grid(row=3, column=0, columnspan=2, pady=(5, 10))
-        nEdges = int(self.iNumberOfEdges.get())
+        try:
+            nVerticies = int(self.iNumberOfVerticies.get())
+            nEdges = int(self.iNumberOfEdges.get())
+        except ValueError:
+            tk.messagebox.showerror("Error", "Values entered as edge/verticies are not integers")
+            return
         InputsTab.createTableInput(self.edgesInput, 2, nEdges, 8)
 
     @staticmethod
